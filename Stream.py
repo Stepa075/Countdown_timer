@@ -5,7 +5,7 @@ import os
 import Variables
 import sys
 
-default_seconds = 120  # изначальное положение(2 мин 00 сек)
+default_seconds = 120  # изначальное положение(120 мин 00 сек)
 timer_seconds = 0
 timer_running = True
 
@@ -28,23 +28,20 @@ def open_file():
 
 def timer_tick():
     global timer_running, timer_seconds
-    while not Variables.stop_timer:
-        while timer_seconds > 0:
-            if Variables.stop_timer ==True:
-                break
-            # if timer_running and timer_seconds:
-            # label.after(1000, timer_tick)  # перезапустить через 1 сек
-            # уменьшить таймер
-            timer_seconds -= 1
-            # print(str(timer_seconds))
-            show_timer()
-            sleep(1.0)
-        if Variables.stop_timer == True:
+    while timer_seconds > 0:
+        if Variables.stop_timer:
             break
+
+        timer_seconds -= 1               # уменьшить таймер
+        # print(str(timer_seconds))
+        show_timer()
+        sleep(1.0)
+                                         # тут еще разобраться нужно в настройке этой функции
+    if Variables.stop_timer:
+        pass
+    else:
         print('Finish Timer!')
         do_it_by_end_timer()
-        break
-
 
 def show_timer():
     '''отобразить таймер'''

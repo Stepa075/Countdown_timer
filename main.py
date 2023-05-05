@@ -7,11 +7,10 @@ import Variables
 import Stream
 
 
-
-
 def set_timer():
     lbl['text'] = Variables.set_timer_time
     root.after(1000, set_timer)
+
 
 root = Tk()
 
@@ -23,9 +22,6 @@ var3 = IntVar()
 var3.set(00)
 check_cb = BooleanVar()
 check_cb.set(False)
-
-
-
 
 root.title("Python TIMER by Stepa075")
 root.geometry('355x160')
@@ -41,11 +37,12 @@ h = spin_hour.get()
 m = spin_min.get()
 s = spin_sec.get()
 
+
 def circle_request():
     Variables.h = spin_hour.get()
     Variables.m = spin_min.get()
     Variables.s = spin_sec.get()
-    print('Time variables= ' + str(Variables.h) + ' ' +  str(Variables.m) + ' ' +  str(Variables.s))
+    print('Time variables= ' + str(Variables.h) + ' ' + str(Variables.m) + ' ' + str(Variables.s))
     Variables.sound = check_cb.get()
     print('cb_sound ' + str(check_cb.get()))
     Variables.input_combo_box = combo_box.current()
@@ -53,14 +50,13 @@ def circle_request():
     root.after(1000, circle_request)
 
 
-
-
 hours = Label(f1, text=' Часы', font=("Arial Bold", 12))
 minutes = Label(f1, text=' Минуты', font=("Arial Bold", 12))
 seconds = Label(f1, text=' Секунды', font=("Arial Bold", 12))
 
 combo_box = Combobox(f2, width=16, font=("Arial Bold", 11))
-combo_box['values'] = ('Выключить ПК', 'Перезагрузить ПК', 'Гибернация',  'Выполнить файл', 'Завершить файл', 'Выдать напоминание')
+combo_box['values'] = (
+'Выключить ПК', 'Перезагрузить ПК', 'Гибернация', 'Выполнить файл', 'Завершить файл', 'Выдать напоминание')
 combo_box.current(0)
 button = Button(f2, text='Пуск', font=("Arial Bold", 12), command=Stream.start_timer)
 button_stop = Button(f2, text='Стоп', font=("Arial Bold", 12), command=Stream.stop_timer)
@@ -68,7 +64,6 @@ button_stop = Button(f2, text='Стоп', font=("Arial Bold", 12), command=Strea
 cb_sound = Checkbutton(f3, text='Звук', font=("Arial Bold", 10), var=check_cb)
 lbl = Label(f3, text="00:00:00", font=("Arial Bold", 16))
 button1 = Button(f3, text='О авторе', width=13, command=Variables.about)
-
 
 f1.grid(column=0, row=0, sticky=N, padx=2, pady=2)
 f2.grid(column=1, row=0, sticky=N + S + W + E, padx=2, pady=2)
@@ -85,8 +80,7 @@ button.grid(column=0, row=1, sticky=N + S + W + E, padx=3, pady=3)
 button_stop.grid(column=1, row=1, sticky=N + S + W + E, padx=3, pady=3)
 lbl.grid(column=0, row=0, sticky=N + S + W + E, padx=15, pady=3)
 cb_sound.grid(column=1, row=0, sticky=N + S + W + E, padx=3, pady=3)
-button1.grid(column=2, row=0,  sticky=N + S + W + E, padx=3, pady=3)
-
+button1.grid(column=2, row=0, sticky=N + S + W + E, padx=3, pady=3)
 
 root.after(0, circle_request)
 root.after(0, set_timer)
